@@ -2,7 +2,9 @@ export const format = (text: string | undefined) => {
   if (text === undefined) {
     return undefined;
   } else {
-    return text.replaceAll('. ', '.\n')
+    // eslint-disable-next-line no-control-regex
+    return text.replace(/\n+/g, ' ')
+      .replaceAll('. ', '.\n')
       .replaceAll('\n', '\n\n')
       .replaceAll('i.e.\n\n', 'i.e. ')
       .replaceAll('e.g.\n\n', 'e.g. ')
