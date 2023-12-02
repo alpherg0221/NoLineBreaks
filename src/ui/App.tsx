@@ -2,6 +2,7 @@ import './App.css'
 import {appViewModel} from './AppState.tsx'
 import {StackShim} from "@fluentui/react-migration-v8-v9";
 import {
+  Button,
   CompoundButton,
   Divider,
   Dropdown,
@@ -14,10 +15,13 @@ import {
   useId,
   useToastController
 } from "@fluentui/react-components";
-import {CopyRegular, OpenRegular} from "@fluentui/react-icons";
+import {CopyRegular, DismissRegular, OpenRegular} from "@fluentui/react-icons";
 
 function App() {
   const viewModel = appViewModel()
+
+  const textHeight: string = "80vh";
+  const textWidth: string = "47.5vw";
 
   const toasterId = useId("toaster");
   const {dispatchToast} = useToastController(toasterId);
@@ -30,16 +34,18 @@ function App() {
   return (
     <div style={{minHeight: "100vh", display: "grid", placeItems: "center", textAlign: "center"}}>
       <Toaster toasterId={toasterId}/>
-
       <StackShim tokens={{childrenGap: 40}} horizontalAlign="center" verticalAlign="center">
+        <Button icon={<DismissRegular fontSize={48}/>} onClick={() => viewModel.update({text: ""})}/>
+
         <StackShim horizontal tokens={{childrenGap: 20}}>
           <Field
-            style={{height: "85vh", width: "45vw", maxHeight: "85vh"}}
+            style={{height: textHeight, width: textWidth, maxHeight: "85vh"}}
             validationState={viewModel.text.length <= 5000 ? "success" : "error"}
             validationMessage={`${viewModel.text.length} / 5000`}
           >
             <Textarea
-              style={{height: "85vh", width: "45vw"}}
+              value={viewModel.text}
+              style={{height: textHeight, width: textWidth}}
               textarea={{style: {maxHeight: "85vh"}}}
               size="large"
               onChange={(_, data) => {
@@ -49,14 +55,14 @@ function App() {
           </Field>
 
           <Field
-            style={{height: "85vh", width: "45vw"}}
+            style={{height: textHeight, width: textWidth}}
             validationState={viewModel.formattedText.length <= 5000 ? "success" : "error"}
             validationMessage={`${viewModel.formattedText.length} / 5000`}
           >
             <Textarea
               value={viewModel.formattedText}
-              style={{height: "85vh", width: "45vw"}}
-              textarea={{style: {maxHeight: "85vh"}}}
+              style={{height: textHeight, width: textWidth}}
+              textarea={{style: {maxHeight: textHeight}}}
               size="large"
               readOnly
             />
@@ -67,7 +73,7 @@ function App() {
 
         <StackShim horizontal verticalAlign="center" tokens={{childrenGap: 20}}>
           <CompoundButton
-            style={{width: "35vw"}}
+            style={{width: "37.5vw", fontSize: 24}}
             icon={<CopyRegular fontSize={48}/>}
             appearance="subtle"
             onClick={copy}
@@ -90,7 +96,7 @@ function App() {
           </Dropdown>
 
           <CompoundButton
-            style={{width: "35vw"}}
+            style={{width: "37.5vw", fontSize: 24}}
             icon={<OpenRegular fontSize={48}/>}
             appearance="subtle"
             onClick={viewModel.open}
