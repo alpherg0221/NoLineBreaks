@@ -78,7 +78,7 @@ function App() {
             appearance="subtle"
             onClick={copy}
           >
-            Copy Formatted Text
+            Copy
           </CompoundButton>
 
           <Dropdown
@@ -101,7 +101,7 @@ function App() {
             appearance="subtle"
             onClick={viewModel.open}
           >
-            Open in New Tab
+            Open
           </CompoundButton>
         </StackShim>
       </StackShim>
