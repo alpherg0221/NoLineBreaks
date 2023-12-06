@@ -20,7 +20,7 @@ import {CopyRegular, DismissRegular, OpenRegular} from "@fluentui/react-icons";
 function App() {
   const viewModel = appViewModel()
 
-  const textHeight: string = "80vh";
+  const textHeight: string = "75vh";
   const textWidth: string = "47.5vw";
 
   const toasterId = useId("toaster");
@@ -39,14 +39,14 @@ function App() {
 
         <StackShim horizontal tokens={{childrenGap: 20}}>
           <Field
-            style={{height: textHeight, width: textWidth, maxHeight: "85vh"}}
+            style={{height: textHeight, width: textWidth, maxHeight: textHeight}}
             validationState={viewModel.text.length <= 5000 ? "success" : "error"}
             validationMessage={`${viewModel.text.length} / 5000`}
           >
             <Textarea
               value={viewModel.text}
               style={{height: textHeight, width: textWidth}}
-              textarea={{style: {maxHeight: "85vh"}}}
+              textarea={{style: {maxHeight: textHeight}}}
               size="large"
               onChange={(_, data) => {
                 viewModel.update({text: data.value})
